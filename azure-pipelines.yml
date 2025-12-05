@@ -1,0 +1,22 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: UseJavaVersion@1
+    inputs:
+      versionSpec: '17'
+      addToPath: true
+
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'clean package'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'target/*.jar'
+      ArtifactName: 'springboot-jar'
+
