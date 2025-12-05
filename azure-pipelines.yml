@@ -11,14 +11,16 @@ steps:
       jdkArchitectureOption: 'x64'
       jdkSourceOption: 'PreInstalled'
 
-
   - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
       goals: 'clean package'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/*.xml'
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'target/*.jar'
       ArtifactName: 'springboot-jar'
+
 
